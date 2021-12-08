@@ -19,15 +19,17 @@ function fetchCountriesAll(e) {
   const name = form.value.trim();
 
   API.fetchCountries(name)
-    .then(secondERr)
+    .then(listContries)
 
     .catch(onFetchError);
 }
 
-function secondERr(country) {
+function listContries(country) {
   if (country.length > 10) {
     clearContainerAll();
-    Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
+    Notiflix.Notify.info('Too many matches found. Please enter a more specific name.', {
+      width: '560px',
+    });
   } else {
     renderCountryCards(country);
   }
@@ -51,7 +53,9 @@ function renderCountryCard(country) {
 }
 
 function onFetchError(error) {
-  Notiflix.Notify.warning('Oops, there is no country with that name');
+  Notiflix.Notify.warning('Oops, there is no country with that name', {
+    width: '560px',
+  });
   clearContainer();
   clearContainerAll();
 }
