@@ -16,12 +16,16 @@ searchForm.addEventListener('input', debounce(fetchCountriesAll, DEBOUNCE_DELAY)
 function fetchCountriesAll(e) {
   e.preventDefault();
   const form = e.target;
+
   const name = form.value.trim();
 
-  API.fetchCountries(name)
-    .then(listContries)
+  if (name !== '') {
+    API.fetchCountries(name)
+      .then(listContries)
 
-    .catch(onFetchError);
+      .catch(onFetchError);
+  }
+  return;
 }
 
 function listContries(country) {
